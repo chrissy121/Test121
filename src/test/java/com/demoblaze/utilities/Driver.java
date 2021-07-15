@@ -27,7 +27,7 @@ public class Driver {
             We read our browser type from configuration.properties file using
             .getProperty method we creating in ConfigurationReader class.
              */
-            String browserType = ConfigurationReader.getProperty("browser");
+            String browserType = com.demoblaze.utilities.ConfigurationReader.getProperty("browser");
 
             /*
             Depending on the browser type our switch statement will determine

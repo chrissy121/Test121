@@ -22,5 +22,11 @@ public class purchaseStepDefs {
         System.out.println("expectedPurchaseAmount = " + expectedPurchaseAmount);
     }
 
+    @When("User removes {string} from cart")
+    public void user_removes_from_cart(String product) {
+      expectedPurchaseAmount -= adidasPage.productRemover(product);
+        System.out.println("expectedPurchaseAmount = " + expectedPurchaseAmount);
+    }
 
 }
+

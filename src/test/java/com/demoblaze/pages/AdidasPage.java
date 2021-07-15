@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AdidasPage {
+
     public AdidasPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
@@ -22,13 +23,17 @@ public class AdidasPage {
     @FindBy(xpath = "(//a[@class='nav-link'])[1]")
     public WebElement homeLink;
 
+    @FindBy(xpath = "//a[.='Cart']")
+    public WebElement cart;
+
 
 
     public int productAdder(String category, String product) {
-        Driver.getDriver().findElement(By.xpath("//a[.='" +category+"']")).click();
-        BrowserUtils.sleep(1);
-        Driver.getDriver().findElement(By.xpath("//a[.='" +product+"']")).click();
-        BrowserUtils.sleep(1);
+
+        Driver.getDriver().findElement(By.xpath("//a[.='"+ category +"']")).click();
+        BrowserUtils.sleep(2);
+        Driver.getDriver().findElement(By.xpath("//a[.='" + product + "']")).click();
+        BrowserUtils.sleep(2);
 
         String amountString = purchasePrice.getText();
         String[] arrayAmount = amountString.split(" ");
@@ -36,13 +41,24 @@ public class AdidasPage {
 
         addCart.click();
         BrowserUtils.sleep(1);
-        Alert alert = Driver.getDriver().switchTo().alert();
-        alert.accept();
-        BrowserUtils.sleep(1);
+try {
+    Alert alert = Driver.getDriver().switchTo().alert();
+    alert.accept();
+} catch (Exception e) {
 
+}
+//        BrowserUtils.sleep(1);
         homeLink.click();
 
         return amount;
 
+    }
+    public int productRemover(String product) {
+        cart.click();
+        BrowserUtils.sleep(1);
+        int amount = Integer.parseInt(Driver.getDriver().findElement(By.xpath("//tbody//tr//td[.= '" +product +"']/..//td[3]")).getText());
+        Driver.getDriver().findElement(By.xpath("//table//tr//td[.='"+product+"']/..//td[.='Delete']/a")).click();
+        BrowserUtils.sleep(3);
+        return amount;
     }
 }
