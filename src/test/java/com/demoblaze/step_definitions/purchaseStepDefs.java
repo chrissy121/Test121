@@ -19,6 +19,7 @@ public class purchaseStepDefs {
     @When("User adds {string} from {string}")
     public void user_adds_from(String product, String category) {
         expectedPurchaseAmount += adidasPage.productAdder(category, product);
+        System.out.println("expectedPurchaseAmount = " + expectedPurchaseAmount);
     }
 
 
